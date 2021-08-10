@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="pageIcon.png" type="image/x-icon">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        Calculadora
+    </header>
+    <main>
+        <div id="result"></div>
+        <div class="operator-box">
+            <div class="operator" value="+">+</div>
+            <div class="operator" value="-">-</div>
+            <div class="operator" value="x">x</div>
+            <div class="operator" value="/">÷</div> <!--unicode do símbolo da divisão-->
+        </div>
+        <div class="number-box">
+            <div>
+                <div class="numero" value='7'>7</div>
+                <div class="numero" value="8">8</div>
+                <div class="numero" value="9">9</div>
+            </div>
+            <div>
+                <div class="numero" value=4>4</div>
+                <div class="numero" value=5>5</div>
+                <div class="numero" value=6>6</div>
+            </div>
+            <div>
+                <div class="numero" value="1">1</div>
+                <div class="numero" value=2>2</div>
+                <div class="numero" value=3>3</div>
+            </div>
+            <div>
+                <div class="numero" value=0>0</div>
+                <div class="numero" value=".">.</div>
+                <div id="limpar" value="C">C</div>
+            </div>
+        </div>
+        <div id="sinalIgual" value="=">=</div>
+        
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
