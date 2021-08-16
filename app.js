@@ -58,62 +58,74 @@ equalSing.addEventListener('click', function(e){
     //cleaning screen
     screen.innerHTML = "";
 
-    //spliting numbers and operators
-    let elements = actualNumber.split("");
-
     //getting only numbers
     const numberElements = [];
     const operatorsElements = [];
     const indexElements = [];
+    let numberUniqueElement = "";
 
-    //MODIFICAR A PARTIR DAQUI. FAZER AS CONTAS DIRETAMENTE NESSE FOR.
-
-    for(let i = 0; i < elements.length; i++){
-        if (elements[i] == "+" || elements[i] == "-" || elements[i] == "x" || elements[i] == "÷"){
-            indexElements.push(elements.indexOf(elements[i])); //armazena o index do operador na array
-            operatorsElements.push(elements[i]); //armazena o operador na array
-        } else {
-            numberElements.push(elements[i]); //armazena o número 
-        }
+    //inserting numbers on array
+    for(let i = 0; i < actualNumber.length; i++){
+        if (actualNumber[i] === "+" || actualNumber[i] === "-" || actualNumber[i] === "x" || actualNumber[i] === "÷"){
+            // operatorsElements.push(actualNumber[i]); //insert operator on array
+            // indexElements.push(actualNumber.indexOf(actualNumber[i])); //insert index of operator on array
+            numberElements.push(actualNumber[i]);
+            numberUniqueElement = "";
+        }else if(actualNumber[i+1] === "+" || actualNumber[i+1] === "-" || actualNumber[i+1] === "x" || actualNumber[i+1] === "÷"){
+                numberUniqueElement = numberUniqueElement + actualNumber[i];    
+                numberElements.push(numberUniqueElement);  
+            } else {
+                numberUniqueElement = numberUniqueElement + actualNumber[i];          
+            }
     }
 
-    let concatElements = [elements[0]];
+    numberElements.push(numberUniqueElement);
 
-    // for(let i = 0; i < elements.length; i++){
-    //     //check if there's multiplication to do
-    //     if (elements[i] == "x"){ 
-    //         for(let i2 = i + 1; i2 < elements.length; i2++){
-    //             if (elements[i2] == "+" || elements[i2] == "-" || elements[i2] == "x" || elements[i2] == "÷"){
-    //                 break;
-    //             } else{
-    //                 concatElements = concatElements + elements[i2];
-    //             }
-    //         }
-    //     }
-    // }
-
-    for(let i = 0; i < elements.length; i++){
-        if (elements[i] == "+" || elements[i] == "-" || elements[i] == "x" || elements[i] == "÷"){
-            break;
-        } else {
-            concatElements[i] = elements[i-1] + elements[i]; 
+    //check division
+    for(let i = 0; i < numberElements.length; i++){
+        if(numberElements[i] == "÷"){
+            let newUniqueNumber = numberElements[i-1] / numberElements[i+1];
+            numberElements[i-1] = newUniqueNumber;
+            numberElements.splice(numberElements.indexOf(numberElements[i]), 2);
+            i = 0; //restart for
         }
-        concatElements.push(concatElements[i]);
-    }    
+        console.log(numberElements);
+    }
 
+    //check multiplication
+    for(let i = 0; i < numberElements.length; i++){
+        if(numberElements[i] == "x"){
+            let newUniqueNumber = numberElements[i-1] * numberElements[i+1];
+            numberElements[i-1] = newUniqueNumber;
+            numberElements.splice(numberElements.indexOf(numberElements[i]), 2);
+            i = 0; //restart for
+        }
+        console.log(numberElements);
+    }
 
-    // console.log(numberElements);
-    // console.log(operatorsElements);
-    // console.log(indexElements);
-    console.log(concatElements);
+    //check sum
+    for(let i = 0; i < numberElements.length; i++){
+
+        if(numberElements[i] == "+"){
+            let newUniqueNumber = parseFloat(numberElements[i-1]) + parseFloat(numberElements[i+1]);
+            numberElements[i-1] = newUniqueNumber;
+            numberElements.splice(numberElements.indexOf(numberElements[i]), 2);
+            i = 0; //restart for
+        }
+        console.log(numberElements);
+    }
+
+    //check sub
+    for(let i = 0; i < numberElements.length; i++){
+        if(numberElements[i] == "-"){
+            let newUniqueNumber = numberElements[i-1] - numberElements[i+1];
+            numberElements[i-1] = newUniqueNumber;
+            numberElements.splice(numberElements.indexOf(numberElements[i]), 2);
+            i = 0; //restart for
+        }
+        console.log(numberElements);
+    }
+
+    //showing result
+    screen.innerHTML = numberElements;
 });
-
-
-
-
-
-
-
-
-
-
